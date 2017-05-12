@@ -1,6 +1,6 @@
 {
-  "name": "fetchival",
-  "version": "0.3.2",
+  "name": "fetchival-pluggable",
+  "version": "0.4.0",
   "description": "Makes JSON requests with fetch easier",
   "main": "index.js",
   "directories": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/typicode/fetchival.git"
+    "url": "https://github.com/shanewholloway/fetchival.git"
   },
   "keywords": [
     "fetch",
@@ -22,15 +22,18 @@
     "REST"
   ],
   "author": "Typicode <typicode@gmail.com>",
+  "contributors": [
+    "Shane Holloway (https://github.com/shanewholloway)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/typicode/fetchival/issues"
+    "url": "https://github.com/shanewholloway/fetchival/issues"
   },
-  "homepage": "https://github.com/typicode/fetchival",
+  "homepage": "https://github.com/shanewholloway/fetchival",
   "devDependencies": {
-    "chai": "^2.2.0",
-    "mocha": "^2.2.4",
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
     "node-fetch": "^1.1.1",
-    "uglify-js": "^2.4.20"
+    "uglify-js": "^3.0.4"
   }
 }
