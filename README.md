@@ -1,8 +1,8 @@
 # fetchival.js [![Travis](https://img.shields.io/travis/typicode/fetchival.svg)](https://travis-ci.org/typicode/fetchival)
 
-** Note: ** This is fork of [typicode/fetchival](https://github.com/typicode/fetchival)
+**Note:** This is fork of [typicode/fetchival](https://github.com/typicode/fetchival)
 with pluggable registry of response handler functions and data encoding functions,
-as well as a few bugfixes.
+as well as a few bugfixes.  `yarn add fetchival-pluggable`
 
 
 > Makes writing JSON requests with [fetch](https://github.com/github/fetch) easier
