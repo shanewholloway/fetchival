@@ -12,20 +12,17 @@
     return '?' + arr.join('&')
   }
 
-  function identity(arg) { return arg }
-
   var responseHandlers = {
     'json': function(response) { return response.json() },
     'text': function(response) { return response.text() },
     'response': true
   }
 
+  function noop(v) { return v }
   var encodeHandlers = {
-    'json': JSON.stringify,
-    'noop': identity,
-    true: identity,
-    false: identity,
-  }
+    'none': noop, false: noop, null: noop,
+    'json': JSON.stringify }
+
 
   function _fetch (method, url, opts, data, queryParams) {
     // Use a shallow copy of opts parameter and opts.header subfield
@@ -53,8 +50,14 @@
       opts.body = opts.encodeAs(data)
     }
 
+    if (opts.beforeFetch) {
+      opts.beforeFetch(url, opts)
+    }
     return fetchival.fetch(url, opts)
       .then(function (response) {
+        if (opts.afterFetch) {
+          opts.afterFetch(url, opts)
+        }
         if (response.status >= 200 && response.status < 300) {
           if(opts.responseAs===true)
             return response
@@ -73,6 +76,9 @@
   }
 
   function fetchival (url, opts) {
+    if (! /https?:\/\//.test(url))
+      throw new TypeError("Expected url to be a string starting with http:// or https://")
+
     opts = opts || {}
 
     var _ = function (u, o) {
@@ -81,6 +87,9 @@
       o = o || {}
       defaults(o, opts)
       return fetchival(u, o)
+    }
+    _.inspect = function() {
+      return '<<fetchival '+url+'>>'
     }
 
     _.get = function (queryParams) {
