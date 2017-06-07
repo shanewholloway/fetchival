@@ -83,7 +83,7 @@
 
     var _ = function (u, o) {
       // Extend parameters with previous ones
-      u = url + '/' + u
+      u = !u ? url : url + (u+'').replace(/^\/?/, '/')
       o = o || {}
       defaults(o, opts)
       return fetchival(u, o)
