@@ -83,7 +83,9 @@
 
     var _ = function (u, o) {
       // Extend parameters with previous ones
-      u = !u ? url : url + (u+'').replace(/^\/?/, '/')
+      if (!u) u = url
+      else u = url.replace(/\/$/, '')  // trim trailing slash from original
+         + ('/'+u).replace(/^\/\//, '/') // join with url part, replacing leading // with a single /
       o = o || {}
       defaults(o, opts)
       return fetchival(u, o)

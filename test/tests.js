@@ -30,6 +30,12 @@ var requestRegisteredExample = fetchival('http://jsonplaceholder.typicode.com', 
   responseAs: 'registered-example'
 })
 
+var requestRegisteredExampleWithTrailingSlash = fetchival('http://jsonplaceholder.typicode.com/', {
+  mode: 'cors',
+  headers: { 'X-TEST': 'test' },
+  responseAs: 'registered-example'
+})
+
 var requestCustomExample = fetchival('http://jsonplaceholder.typicode.com', {
   mode: 'cors',
   headers: { 'X-TEST': 'test' },
@@ -179,6 +185,22 @@ describe('fetchival', function () {
   describe('requestRegisteredExample(posts/1/comments)', function () {
     var posts = requestRegisteredExample('posts')
     var comments = posts(1 + '/comments')
+
+    it('should #get()', function (done) {
+      comments
+        .get()
+        .then(function (extendedReponseObj) {
+          assert.equal('registered-example', extendedReponseObj.kind)
+          assert(extendedReponseObj.response.ok)
+          assert(extendedReponseObj.json.length)
+          done()
+        })
+    })
+  })
+
+  describe('requestRegisteredExampleWithTrailingSlash(posts/1/comments)', function () {
+    var posts = requestRegisteredExampleWithTrailingSlash('/posts')
+    var comments = posts(`/${1}/comments`)
 
     it('should #get()', function (done) {
       comments
