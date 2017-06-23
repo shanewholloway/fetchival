@@ -90,6 +90,8 @@
       defaults(o, opts)
       return fetchival(u, o)
     }
+    _.url = url
+    _.toString = function() { return url }
     _.inspect = function() {
       return '<<fetchival '+url+'>>'
     }
