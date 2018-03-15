@@ -56,14 +56,14 @@
     return fetchival.fetch(url, opts)
       .then(function (response) {
         if (opts.afterFetch) {
-          opts.afterFetch(url, opts)
+          opts.afterFetch(response, url, opts)
         }
         if (response.status >= 200 && response.status < 300) {
-          if(opts.responseAs===true)
+          if (opts.responseAs===true)
             return response
           if (response.status == 204)
-            return null;
-          return opts.responseAs(response);
+            return null
+          return opts.responseAs(response)
         }
         if(typeof opts.errorAs !== 'function') {
           var err = new Error(response.statusText)
@@ -99,6 +99,9 @@
     _.get = function (queryParams) {
       return _fetch('GET', url, opts, null, queryParams)
     }
+    _.getEx = function (data, queryParams) {
+      return _fetch('GET', url, opts, data, queryParams)
+    }
 
     _.post = function (data, queryParams) {
       return _fetch('POST', url, opts, data, queryParams)
@@ -114,6 +117,9 @@
 
     _.delete = function (queryParams) {
       return _fetch('DELETE', url, opts, null, queryParams)
+    }
+    _.deleteEx = function (data, queryParams) {
+      return _fetch('DELETE', url, opts, data, queryParams)
     }
 
     return _
